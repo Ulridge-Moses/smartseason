@@ -110,3 +110,20 @@ export const me = async (req, res) => {
     return res.status(500).json({ message: 'Server error' })
   }
 }
+
+export const getAgents = async (req, res) => {
+  try {
+    const agents = await prisma.user.findMany({
+      where: { role: 'AGENT' },
+      select: {
+        id: true,
+        name: true,
+        email: true
+      }
+    })
+    return res.status(200).json({ agents })
+  } catch (err) {
+    console.error(err)
+    return res.status(500).json({ message: 'Server error' })
+  }
+}
