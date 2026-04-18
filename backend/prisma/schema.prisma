@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+// ================================
+// USERS
+// ================================
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(AGENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fields  Field[]       @relation("AgentFields")
+  updates FieldUpdate[]
+}
+
+// ================================
+// FIELDS
+// ================================
+model Field {
+  id          String      @id @default(uuid())
+  name        String
+  cropType    String
+  plantingDate DateTime
+  stage       FieldStage  @default(PLANTED)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  agentId  String
+  agent    User          @relation("AgentFields", fields: [agentId], references: [id])
+  updates  FieldUpdate[]
+}
+
+// ================================
+// FIELD UPDATES
+// ================================
+model FieldUpdate {
+  id        String     @id @default(uuid())
+  note      String
+  stage     FieldStage
+  createdAt DateTime   @default(now())
+
+  fieldId String
+  field   Field  @relation(fields: [fieldId], references: [id])
+
+  agentId String
+  agent   User   @relation(fields: [agentId], references: [id])
+}
+
+// ================================
+// ENUMS
+// ================================
+enum Role {
+  ADMIN
+  AGENT
+}
+
+enum FieldStage {
+  PLANTED
+  GROWING
+  READY
+  HARVESTED
+}
