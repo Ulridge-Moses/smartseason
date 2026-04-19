@@ -10,12 +10,18 @@ import updateRoutes from './routes/updates.js'
 const app = express()
 const PORT = process.env.PORT || 3000
 
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',
+    'https://smartseason-swart.vercel.app'
+  ],
+  credentials: true
+}
+
 // Security middleware
 app.use(helmet())
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-}))
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 
 // Body parsing
 app.use(express.json())
