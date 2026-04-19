@@ -25,6 +25,5 @@ Thumbs.db
 .vscode/settings.json
 .idea/
 
-# Prisma
-backend/prisma/migrations/
+
 
