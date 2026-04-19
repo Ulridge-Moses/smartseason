@@ -2,6 +2,15 @@
 
 A full stack web application for tracking crop progress across multiple fields during a growing season.
 
+
+
+## Live Demo
+
+- **Frontend:** https://smartseason-swart.vercel.app
+- **Backend API:** https://smartseason-production-19fc.up.railway.app
+
+
+
 ## Demo Credentials
 
 | Role  | Email                      | Password  |
