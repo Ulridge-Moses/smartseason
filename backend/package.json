@@ -5,11 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-     "postinstall": "npx prisma generate",
-     "build": "npx prisma migrate deploy && npx prisma db seed",
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
-  },
+  "postinstall": "npx prisma generate",
+  "build": "echo 'build complete'",
+  "start": "npx prisma migrate deploy && npx prisma db seed && node src/index.js",
+  "dev": "nodemon src/index.js"
+},
   "prisma": {
     "seed": "node prisma/seed.js"
   },
