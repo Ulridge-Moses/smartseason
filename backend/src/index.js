@@ -21,7 +21,6 @@ const corsOptions = {
 // Security middleware
 app.use(helmet())
 app.use(cors(corsOptions))
-app.options('*', cors(corsOptions))
 
 // Body parsing
 app.use(express.json())
